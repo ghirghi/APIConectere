@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web App</title>
+</head>
+<body>
+    <h1>Welcome to the Python Web App</h1>
+    <button id="fetchDataBtn">Fetch Data</button>
+    <button id="manipulateDataBtn">Manipulate Data</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("fetchDataBtn").onclick = async () => {
+            const response = await fetch("/fetch-data");
+            const data = await response.json();
+            document.getElementById("result").innerText = JSON.stringify(data);
+        };
+
+        document.getElementById("manipulateDataBtn").onclick = async () => {
+            const response = await fetch("/manipulate-data", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ sample: "data" })
+            });
+            const data = await response.json();
+            document.getElementById("result").innerText = JSON.stringify(data);
+        };
+    </script>
+</body>
+</html>
